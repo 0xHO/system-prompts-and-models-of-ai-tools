@@ -1,6 +1,6 @@
 [
   {
-    "description": "Use this tool to add a dependency to the project. The dependency should be a valid npm package name. Usage:\n\n package-name@version\n",
+    "description": "使用此工具向项目添加依赖项。依赖项应为有效的 npm 包名称。用法：\n\n package-name@version\n",
     "name": "lov-add-dependency",
     "parameters": {
       "properties": {
@@ -16,7 +16,7 @@
     }
   },
   {
-    "description": "Regex-based code search with file filtering and context.\n\nSearch using regex patterns across files in your project.\n\nParameters:\n- query: Regex pattern to find (e.g., \"useState\")\n- include_pattern: Files to include using glob syntax (e.g., \"src/\")\n- exclude_pattern: Files to exclude using glob syntax (e.g., \"/*.test.tsx\")\n- case_sensitive: Whether to match case (default: false)\n\nTip: Use \\\\ to escape special characters in regex patterns.",
+    "description": "基于正则表达式的代码搜索，具有文件筛选和上下文功能。\n\n使用正则表达式模式在项目中的文件中进行搜索。\n\n参数：\n- query: 要查找的正则表达式模式（例如，\"useState\"）\n- include_pattern: 要包含的文件的 glob 语法（例如，\"src/\"）\n- exclude_pattern: 要排除的文件的 glob 语法（例如，\"/*.test.tsx\"）\n- case_sensitive: 是否区分大小写（默认为 false）\n\n提示：在正则表达式模式中使用 \\\\ 来转义特殊字符。",
     "name": "lov-search-files",
     "parameters": {
       "properties": {
@@ -45,7 +45,7 @@
     }
   },
   {
-    "description": "\nUse this tool to write to a file. Overwrites the existing file if there is one. The file path should be relative to the project root.\n\n ### IMPORTANT: MINIMIZE CODE WRITING\n - PREFER using lov-line-replace for most changes instead of rewriting entire files\n - This tool is mainly meant for creating new files or as fallback if lov-line-replace fails\n - When writing is necessary, MAXIMIZE use of \"// ... keep existing code\" to maintain unmodified sections\n - ONLY write the specific sections that need to change - be as lazy as possible with your writes\n \n ### Using \"keep existing code\" (MANDATORY for large unchanged sections):\n - Any unchanged code block over 5 lines MUST use \"// ... keep existing code\" comment\n - The comment MUST contain the EXACT string \"... keep existing code\" \n - Example: \"// ... keep existing code (user interface components)\"\n - NEVER rewrite large sections of code that don't need to change\n \n Example with proper use of keep existing code:\n <lov-write file_path=\"src/App.js\">\n import React from 'react';\n import './App.css';\n \n function App() {\n // ... keep existing code (all UI components)\n \n // Only the new footer is being added\n const Footer = () => (\n <footer>New Footer Component</footer>\n );\n \n return (\n <div className=\"App\">\n // ... keep existing code (main content)\n <Footer />\n </div>\n );\n }\n \n export default App;\n \n\n ### Parallel Tool Usage\n - If you need to create multiple files, it is very important that you create all of them at once instead of one by one, because it's much faster\n",
+    "description": "\n使用此工具写入文件。如果存在同名文件，则会覆盖。文件路径应相对于项目根目录。\n\n ### 重要提示：最小化代码编写\n - 优先使用 lov-line-replace 进行大多数更改，而不是重写整个文件\n - 此工具主要用于创建新文件或在 lov-line-replace 失败时作为后备\n - 在必须写入时，最大化使用 \"// ... keep existing code\" 来维护未修改的部分\n - 只编写需要更改的特定部分 - 尽可能地懒惰地编写\n \n ### 使用 \"keep existing code\"（对于大型未更改部分是强制性的）：\n - 任何超过 5 行的未更改代码块都必须使用 \"// ... keep existing code\" 注释\n - 注释必须包含确切的字符串 \"... keep existing code\" \n - 示例：\"// ... keep existing code (user interface components)\"\n - 绝不重写不需要更改的大段代码\n \n 正确使用 keep existing code 的示例：\n <lov-write file_path=\"src/App.js\">\n import React from 'react';\n import './App.css';\n \n function App() {\n // ... keep existing code (all UI components)\n \n // 仅添加新的页脚\n const Footer = () => (\n<footer>New Footer Component</footer>\n );\n \n return (\n <div className=\"App\">\n // ... keep existing code (main content)\n<Footer />\n</div>\n );\n }\n \n export default App;\n \n\n ### 并行工具使用\n - 如果你需要创建多个文件，非常重要的是一次性创建所有文件，而不是一个一个地创建，因为这样快得多\n",
     "name": "lov-write",
     "parameters": {
       "properties": {
@@ -66,7 +66,7 @@
     }
   },
   {
-    "description": "Line-Based Search and Replace Tool\n\nUse this tool to find and replace specific content in a file you have access to, using explicit line numbers. This is the PREFERRED and PRIMARY tool for editing existing files. Always use this tool when modifying existing code rather than rewriting entire files.\n\nProvide the following details to make an edit:\n\t1.\tfile_path - The path of the file to modify\n\t2.\tsearch - The content to search for (use ellipsis ... for large sections instead of writing them out in full)\n\t3.\tfirst_replaced_line - The line number of the first line in the search (1-indexed)\n\t4.\tlast_replaced_line - The line number of the last line in the search (1-indexed)\n\t5.\treplace - The new content to replace the found content\n\nThe tool will validate that search matches the content at the specified line range and then replace it with replace.\n\nIMPORTANT: When invoking this tool multiple times in parallel (multiple edits to the same file), always use the original line numbers from the file as you initially viewed it. Do not adjust line numbers based on previous edits.\n\nELLIPSIS USAGE:\nWhen replacing sections of code longer than ~6 lines, you should use ellipsis (...) in your search to reduce the number of lines you need to specify (writing fewer lines is faster).\n- Include the first few lines (typically 2-3 lines) of the section you want to replace\n- Add \"...\" on its own line to indicate omitted content\n- Include the last few lines (typically 2-3 lines) of the section you want to replace\n- The key is to provide enough unique context at the beginning and end to ensure accurate matching\n- Focus on uniqueness rather than exact line counts - sometimes 2 lines is enough, sometimes you need 4\n\n\n\nExample:\nTo replace a user card component at lines 22-42:\n\nOriginal content in file (lines 20-45):\n20: return (\n21: <div className=\"user-list\">\n22: <div className=\"user-card\">\n23: <img src={user.avatar} alt=\"User avatar\" />\n24: <h3>{user.name}</h3>\n25: <p>{user.email}</p>\n26: <p>{user.role}</p>\n27: <p>{user.department}</p>\n28: <p>{user.location}</p>\n29: <div className=\"user-actions\">\n30: <button onClick={() => onEdit(user.id)}>Edit</button>\n31: <button onClick={() => onDelete(user.id)}>Delete</button>\n32: <button onClick={() => onView(user.id)}>View</button>\n33: </div>\n34: <div className=\"user-metadata\">\n35: <span>Created: {user.createdAt}</span>\n36: <span>Updated: {user.updatedAt}</span>\n37: <span>Status: {user.status}</span>\n38: </div>\n39: <div className=\"user-permissions\">\n40: <span>Permissions: {user.permissions.join(', ')}</span>\n41: </div>\n42: </div>\n43: </div>\n44: );\n45: }\n\nFor a large replacement like this, you must use ellipsis:\n- search: \" <div className=\\\"user-card\\\">\\n <img src={user.avatar} alt=\\\"User avatar\\\" />\\n...\\n <span>Permissions: {user.permissions.join(', ')}</span>\\n </div>\\n </div>\"\n- first_replaced_line: 22\n- last_replaced_line: 42\n- replace: \" <div className=\\\"user-card enhanced\\\">\\n <div className=\\\"user-avatar\\\">\\n <img \\n src={user.avatar} \\n alt=\\\"User profile picture\\\" \\n className=\\\"avatar-image\\\"\\n onError={(e) => {\\n e.currentTarget.src = '/default-avatar.png';\\n }}\\n />\\n </div>\\n <div className=\\\"user-info\\\">\\n <h3 className=\\\"user-name\\\">{user.name}</h3>\\n <p className=\\\"user-email\\\">{user.email}</p>\\n <div className=\\\"user-details\\\">\\n <span className=\\\"user-role\\\">{user.role}</span>\\n <span className=\\\"user-department\\\">{user.department}</span>\\n </div>\\n </div>\\n <div className=\\\"user-actions\\\">\\n <button \\n className=\\\"edit-button\\\" \\n onClick={() => onEdit(user.id)}\\n aria-label=\\\"Edit user profile\\\"\\n >\\n Edit Profile\\n </button>\\n </div>\\n </div>\"\n\nCritical guidelines:\n\t1. Line Numbers - Specify exact first_replaced_line and last_replaced_line (1-indexed, first line is line 1)\n\t2. Ellipsis Usage - For large sections (>6 lines), use ellipsis (...) to include only the first few and last few key identifying lines for cleaner, more focused matching\n\t3. Content Validation - The prefix and suffix parts of search (before and after ellipsis) must contain exact content matches from the file (without line numbers). The tool validates these parts against the actual file content\n\t4. File Validation - The file must exist and be readable\n\t5. Parallel Tool Calls - When multiple edits are needed, invoke necessary tools simultaneously in parallel. Do NOT wait for one edit to complete before starting the next\n\t6. Original Line Numbers - When making multiple edits to the same file, always use original line numbers from your initial view of the file",
+    "description": "基于行的搜索和替换工具\n\n使用此工具在你可访问的文件中查找和替换特定内容，使用明确的行号。这是编辑现有文件的首选和主要工具。在修改现有代码时，请始终使用此工具，而不是重写整个文件。\n\n提供以下详细信息以进行编辑：\n\t1.\tfile_path - 要修改的文件的路径\n\t2.\tsearch - 要搜索的内容（对于大段内容，使用省略号 ... 而不是完整写出）\n\t3.\tfirst_replaced_line - 搜索中第一行的行号（从 1 开始）\n\t4.\tlast_replaced_line - 搜索中最后一行的行号（从 1 开始）\n\t5.\treplace - 用于替换找到的内容的新内容\n\n该工具将验证搜索是否与指定行范围的内容匹配，然后将其替换为替换内容。\n\n重要提示：在并行多次调用此工具（对同一文件进行多次编辑）时，请始终使用你最初查看文件时的原始行号。不要根据以前的编辑调整行号。\n\n省略号用法：\n当替换超过约 6 行的代码段时，你应该在搜索中使用省略号 (...) 来减少需要指定的行数（编写更少的行更快）。\n- 包括你要替换的部分的前几行（通常是 2-3 行）\n- 在其自己的行上添加 \"...\" 以表示省略的内容\n- 包括你要替换的部分的最后几行（通常是 2-3 行）\n- 关键是在开头和结尾提供足够的唯一上下文以确保准确匹配\n- 关注唯一性而不是确切的行数 - 有时 2 行就足够了，有时你需要 4 行\n\n\n\n示例：\n要替换第 22-42 行的用户卡片组件：\n\n文件中的原始内容（第 20-45 行）：\n20: return (\n21: <div className=\"user-list\">\n22: <div className=\"user-card\">\n23: <img src={user.avatar} alt=\"User a... [截断]",
     "name": "lov-line-replace",
     "parameters": {
       "properties": {
@@ -75,22 +75,22 @@
           "type": "string"
         },
         "first_replaced_line": {
-          "description": "First line number to replace (1-indexed)",
+          "description": "要替换的第一行行号（从 1 开始）",
           "example": "15",
           "type": "number"
         },
         "last_replaced_line": {
-          "description": "Last line number to replace (1-indexed)",
+          "description": "要替换的最后一行行号（从 1 开始）",
           "example": "28",
           "type": "number"
         },
         "replace": {
-          "description": "New content to replace the search content with (without line numbers)",
+          "description": "用于替换搜索内容的新内容（不带行号）",
           "example": " const handleTaskComplete = useCallback((taskId: string) => {\n const updatedTasks = tasks.map(task =>\n task.id === taskId \n ? { ...task, completed: !task.completed, completedAt: new Date() }\n : task\n );\n setTasks(updatedTasks);\n onTaskUpdate?.(updatedTasks);\n \n // Analytics tracking\n analytics.track('task_completed', { taskId, timestamp: Date.now() });\n }, [tasks, onTaskUpdate]);",
           "type": "string"
         },
         "search": {
-          "description": "Content to search for in the file (without line numbers). This should match the existing code that will be replaced.",
+          "description": "要在文件中搜索的内容（不带行号）。这应该与将被替换的现有代码匹配。",
           "example": " const handleTaskComplete = (taskId: string) => {\n setTasks(tasks.map(task =>\n...\n ));\n onTaskUpdate?.(updatedTasks);\n };",
           "type": "string"
         }
@@ -106,17 +106,17 @@
     }
   },
   {
-    "description": "Download a file from a URL and save it to the repository.\n\nThis tool is useful for:\n- Downloading images, assets, or other files from URLs. Download images in the src/assets folder and import them as ES6 modules.\n- Saving external resources directly to the project\n- Migrating files from external sources to the repository\n\nThe file will be downloaded and saved at the specified path in the repository, ready to be used in the project.",
+    "description": "从 URL 下载文件并将其保存到存储库。\n\n此工具对于以下情况很有用：\n- 从 URL 下载图像、资产或其他文件。在 src/assets 文件夹中下载图像并将其作为 ES6 模块导入。\n- 将外部资源直接保存到项目中\n- 将文件从外部源迁移到存储库\n\n文件将被下载并保存在存储库的指定路径中，以便在项目中使用。",
     "name": "lov-download-to-repo",
     "parameters": {
       "properties": {
         "source_url": {
-          "description": "The URL of the file to download",
+          "description": "要下载的文件的 URL",
           "example": "https://example.com/image.png",
           "type": "string"
         },
         "target_path": {
-          "description": "The path where the file should be saved in the repository (use the public folder unless specified otherwise)",
+          "description": "文件应保存在存储库中的路径（除非另有说明，否则使用 public 文件夹）",
           "example": "public/images/logo.png",
           "type": "string"
         }
@@ -129,12 +129,12 @@
     }
   },
   {
-    "description": "Fetches a website and temporarily saves its content (markdown, HTML, screenshot) to files in `tmp://fetched-websites/`. Returns the paths to the created files and a preview of the content.",
+    "description": "获取一个网站并将其内容（markdown、HTML、屏幕截图）临时保存到 `tmp://fetched-websites/` 中的文件中。返回创建的文件的路径和内容的预览。",
     "name": "lov-fetch-website",
     "parameters": {
       "properties": {
         "formats": {
-          "description": "Comma-separated list of formats to return. Supported formats: 'markdown', 'html', 'screenshot'. Defaults to 'markdown'.",
+          "description": "要返回的格式的逗号分隔列表。支持的格式：'markdown'、'html'、'screenshot'。默认为 'markdown'。",
           "example": "markdown,screenshot",
           "type": "string"
         },
@@ -150,7 +150,7 @@
     }
   },
   {
-    "description": "Use this tool to read the contents of a file. The file path should be relative to the project root. You can optionally specify line ranges to read using the lines parameter (e.g., \"1-800, 1001-1500\"). By default, the first 500 lines are read if lines is not specified.\n\nIMPORTANT GUIDELINES:\n- Do NOT use this tool if the file contents have already been provided in <useful-context>\n- Do NOT specify line ranges unless the file is very large (>500 lines) - rely on the default behavior which shows the first 500 lines\n- Only use line ranges when you need to see specific sections of large files that weren't shown in the default view\n- If you need to read multiple files, invoke this tool multiple times in parallel (not sequentially) for efficiency",
+    "description": "使用此工具读取文件的内容。文件路径应相对于项目根目录。你可以选择使用 lines 参数指定要读取的行范围（例如，\"1-800, 1001-1500\"）。默认情况下，如果未指定 lines，则读取前 500 行。\n\n重要指南：\n- 如果文件内容已在 <useful-context> 中提供，则不要使用此工具\n- 除非文件非常大（>500 行），否则不要指定行范围 - 依赖于显示前 500 行的默认行为\n- 仅在需要查看默认视图中未显示的大文件的特定部分时才使用行范围\n- 如果你需要读取多个文件，请并行（而不是顺序）多次调用此工具以提高效率",
     "name": "lov-view",
     "parameters": {
       "properties": {
@@ -170,7 +170,7 @@
     }
   },
   {
-    "description": "Use this tool to read the contents of the latest console logs at the moment the user sent the request.\nYou can optionally provide a search query to filter the logs. If empty you will get all latest logs.\nYou may not be able to see the logs that didn't happen recently.\nThe logs will not update while you are building and writing code. So do not expect to be able to verify if you fixed an issue by reading logs again. They will be the same as when you started writing code.\nDO NOT USE THIS MORE THAN ONCE since you will get the same logs each time.",
+    "description": "使用此工具读取用户发送请求时最新的控制台日志内容。\n你可以选择提供一个搜索查询来筛选日志。如果为空，你将获得所有最新的日志。\n你可能无法看到最近没有发生的日志。\n在你构建和编写代码时，日志不会更新。所以不要期望通过再次读取日志来验证你是否修复了问题。它们将与你开始编写代码时相同。\n不要多次使用此工具，因为你每次都会得到相同的日志。",
     "name": "lov-read-console-logs",
     "parameters": {
       "properties": {
@@ -186,7 +186,7 @@
     }
   },
   {
-    "description": "Use this tool to read the contents of the latest network requests. You can optionally provide a search query to filter the requests. If empty you will get all latest requests. You may not be able to see the requests that didn't happen recently.",
+    "description": "使用此工具读取最新的网络请求内容。你可以选择提供一个搜索查询来筛选请求。如果为空，你将获得所有最新的请求。你可能无法看到最近没有发生的请求。",
     "name": "lov-read-network-requests",
     "parameters": {
       "properties": {
@@ -202,7 +202,7 @@
     }
   },
   {
-    "description": "Use this tool to uninstall a package from the project.",
+    "description": "使用此工具从项目中卸载一个包。",
     "name": "lov-remove-dependency",
     "parameters": {
       "properties": {
@@ -218,7 +218,7 @@
     }
   },
   {
-    "description": "You MUST use this tool to rename a file instead of creating new files and deleting old ones. The original and new file path should be relative to the project root.",
+    "description": "你必须使用此工具来重命名文件，而不是创建新文件和删除旧文件。原始文件和新文件路径应相对于项目根目录。",
     "name": "lov-rename",
     "parameters": {
       "properties": {
@@ -239,7 +239,7 @@
     }
   },
   {
-    "description": "Use this tool to delete a file. The file path should be relative to the project root.",
+    "description": "使用此工具删除文件。文件路径应相对于项目根目录。",
     "name": "lov-delete",
     "parameters": {
       "properties": {
@@ -255,28 +255,28 @@
     }
   },
   {
-    "description": "Generates an image based on a text prompt and saves it to the specified file path. Use the best models for large images that are really important. Make sure that you consider aspect ratio given the location of the image on the page when selecting dimensions.\n\nFor small images (less than 1000px), use flux.schnell, it's much faster and really good! This should be your default model.\nWhen you generate large images like a fullscreen image, use flux.dev. The maximum resolution is 1920x1920.\nOnce generated, you need to import the images in code as ES6 imports.\n\nPrompting tips:\n- Mentioning the aspect ratio in the prompt will help the model generate the image with the correct dimensions. For example: \"A 16:9 aspect ratio image of a sunset over a calm ocean.\"\n- Use the \"Ultra high resolution\" suffix to your prompts to maximize image quality.\n- If you for example are generating a hero image, mention it in the prompt. Example: \"A hero image of a sunset over a calm ocean.\"\n\nExample:\nimport heroImage from \"@/assets/hero-image.jpg\";\n\nImportant: Dimensions must be between 512 and 1920 pixels and multiples of 32.",
+    "description": "根据文本提示生成图像并将其保存到指定的文件路径。使用最好的模型来处理非常重要的大图像。在选择尺寸时，请确保考虑图像在页面上的位置的宽高比。\n\n对于小图像（小于 1000 像素），请使用 flux.schnell，它速度更快且效果非常好！这应该是你的默认模型。\n当你生成大图像（如全屏图像）时，请使用 flux.dev。最大分辨率为 1920x1920。\n生成后，你需要将图像作为 ES6 导入导入到代码中。\n\n提示技巧：\n- 在提示中提及宽高比将有助于模型生成具有正确尺寸的图像。例如：\"一张 16:9 宽高比的平静海洋上的日落图像。\"\n- 在你的提示中使用“超高分辨率”后缀以最大化图像质量。\n- 如果你例如正在生成一张英雄图像，请在提示中提及它。示例：\"一张平静海洋上的日落的英雄图像。\"\n\n示例：\nimport heroImage from \"@/assets/hero-image.jpg\";\n\n重要提示：尺寸必须在 512 到 1920 像素之间，并且是 32 的倍数。",
     "name": "generate_image",
     "parameters": {
       "properties": {
         "height": {
-          "description": "Image height (minimum 512, maximum 1920)",
+          "description": "图像高度（最小 512，最大 1920）",
           "type": "number"
         },
         "model": {
-          "description": "The model to use for generation. Options: flux.schnell (default), flux.dev. flux.dev generates higher quality images but is slower. Always use flux.schnell unless you're generating a large image like a hero image or fullscreen banner, of if the user asks for high quality.",
+          "description": "用于生成的模型。选项：flux.schnell（默认）、flux.dev。flux.dev 生成更高质量的图像，但速度较慢。除非你正在生成大图像（如英雄图像或全屏横幅），或者用户要求高质量，否则请始终使用 flux.schnell。",
           "type": "string"
         },
         "prompt": {
-          "description": "Text description of the desired image",
+          "description": "所需图像的文本描述",
           "type": "string"
         },
         "target_path": {
-          "description": "The file path where the generated image should be saved. Prefer to put them in the 'src/assets' folder.",
+          "description": "生成的图像应保存的文件路径。最好将它们放在“src/assets”文件夹中。",
           "type": "string"
         },
         "width": {
-          "description": "Image width (minimum 512, maximum 1920)",
+          "description": "图像宽度（最小 512，最大 1920）",
           "type": "number"
         }
       },
@@ -288,27 +288,27 @@
     }
   },
   {
-    "description": "Edits or merges existing images based on a text prompt using Flux Kontext Pro model.\nThis tool can work with single or multiple images:\n- Single image: Apply AI-powered edits based on your prompt\n- Multiple images: Merge/combine images according to your prompt\n\nThe strength parameter controls how much the image changes (0.0-1.0).\nLower values preserve more of the original image structure.\n\nExample prompts for single image:\n- \"make it rainy\"\n- \"change to sunset lighting\"\n- \"add snow\"\n- \"make it more colorful\"\n\nExample prompts for multiple images:\n- \"blend these two landscapes seamlessly\"\n- \"combine the foreground of the first image with the background of the second\"\n- \"merge these portraits into a group photo\"\n- \"create a collage from these images\"\n\n\nThis tool is great for object or character consistency. You can reuse the same image and place it in different scenes for example.",
+    "description": "使用 Flux Kontext Pro 模型根据文本提示编辑或合并现有图像。\n此工具可以处理单个或多个图像：\n- 单个图像：根据你的提示应用 AI 驱动的编辑\n- 多个图像：根据你的提示合并/组合图像\n\nstrength 参数控制图像变化的程度（0.0-1.0）。\n较低的值会保留更多原始图像的结构。\n\n单个图像的示例提示：\n- \"让它下雨\"\n- \"更改为日落光照\"\n- \"添加雪\"\n- \"让它更丰富多彩\"\n\n多个图像的示例提示：\n- \"无缝融合这两个景观\"\n- \"将第一张图像的前景与第二张图像的背景相结合\"\n- \"将这些肖像合并成一张合影\"\n- \"用这些图像创建一张拼贴画\"\n\n\n此工具非常适合对象或角色的一致性。你可以重复使用同一张图像并将其放置在不同的场景中。",
     "name": "edit_image",
     "parameters": {
       "properties": {
         "image_paths": {
-          "description": "Array of paths to existing image files. For single image editing, provide one path. For merging/combining multiple images, provide multiple paths.",
+          "description": "现有图像文件的路径数组。对于单个图像编辑，提供一个路径。对于合并/组合多个图像，提供多个路径。",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "prompt": {
-          "description": "Text description of how to edit/merge the image(s). For multiple images, describe how they should be combined.",
+          "description": "如何编辑/合并图像的文本描述。对于多个图像，描述它们应如何组合。",
           "type": "string"
         },
         "strength": {
-          "description": "How much to change the image (0.0-1.0). Lower values preserve more of the original image.",
+          "description": "图像变化的程度（0.0-1.0）。较低的值会保留更多原始图像。",
           "type": "number"
         },
         "target_path": {
-          "description": "The file path where the edited/merged image should be saved.",
+          "description": "编辑/合并后的图像应保存的文件路径。",
           "type": "string"
         }
       },
@@ -321,28 +321,28 @@
     }
   },
   {
-    "description": "Performs a web search and returns relevant results with text content.\nUse this to find current information, documentation, or any web-based content.\nYou can optionally ask for links or image links to be returned as well.\nYou can also optionally specify a category of search results to return.\nValid categories are (you must use the exact string):\n- \"news\"\n- \"linkedin profile\"\n- \"pdf\"\n- \"github\"\n- \"personal site\"\n- \"financial report\"\n\nThere are no other categories. If you don't specify a category, the search will be general.\n\nWhen to use?\n- When you don't have any information about what the user is asking for.\n- When you need to find current information, documentation, or any web-based content.\n- When you need to find specific technical information, etc.\n- When you need to find information about a specific person, company, or organization.\n- When you need to find information about a specific event, product, or service.\n\nWhen you need to find real (not AI generated) images about a specific person, company, or organization.",
+    "description": "执行网络搜索并返回带有文本内容的相关结果。\n使用此工具查找当前信息、文档或任何基于网络的内容。\n你也可以选择要求返回链接或图像链接。\n你还可以选择指定要返回的搜索结果的类别。\n有效的类别是（你必须使用确切的字符串）：\n- \"新闻\"\n- \"领英个人资料\"\n- \"pdf\"\n- \"github\"\n- \"个人网站\"\n- \"财务报告\"\n\n没有其他类别。如果你不指定类别，搜索将是通用的。\n\n何时使用？\n- 当你对用户所问的内容没有任何信息时。\n- 当你需要查找当前信息、文档或任何基于网络的内容时。\n- 当你需要查找特定的技术信息等时。\n- 当你需要查找有关特定个人、公司或组织的信息时。\n- 当你需要查找有关特定事件、产品或服务的信息时。\n\n当你需要查找有关特定个人、公司或组织的真实（非 AI 生成）图像时。",
     "name": "web_search",
     "parameters": {
       "properties": {
         "category": {
-          "description": "Category of search results to return",
+          "description": "要返回的搜索结果的类别",
           "type": "string"
         },
         "imageLinks": {
-          "description": "Number of image links to return for each result",
+          "description": "为每个结果返回的图像链接数",
           "type": "number"
         },
         "links": {
-          "description": "Number of links to return for each result",
+          "description": "为每个结果返回的链接数",
           "type": "number"
         },
         "numResults": {
-          "description": "Number of search results to return (default: 5)",
+          "description": "要返回的搜索结果数（默认为 5）",
           "type": "number"
         },
         "query": {
-          "description": "The search query",
+          "description": "搜索查询",
           "type": "string"
         }
       },
@@ -353,7 +353,7 @@
     }
   },
   {
-    "description": "Read the analytics for the production build of the project between two dates, with a given granularity. The granularity can be 'hourly' or 'daily'. The start and end dates must be in the format YYYY-MM-DD.\nThe start and end dates should be in RFC3339 format or date only format (YYYY-MM-DD).\n\nWhen to use this tool:\n- When the user is asking for usage of their app\n- When users want to improve their productions apps",
+    "description": "读取项目生产版本在两个日期之间的分析数据，具有给定的粒度。粒度可以是“每小时”或“每天”。开始和结束日期必须采用 YYYY-MM-DD 格式。\n开始和结束日期应采用 RFC3339 格式或仅日期格式 (YYYY-MM-DD)。\n\n何时使用此工具：\n- 当用户询问其应用程序的使用情况时\n- 当用户想要改进其生产应用程序时",
     "name": "read_project_analytics",
     "parameters": {
       "properties": {

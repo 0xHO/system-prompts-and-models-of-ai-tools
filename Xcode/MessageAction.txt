@@ -1,13 +1,13 @@
-The user is curently inside this file: {{filename}}
-The contents are below:
+用户当前在此文件中：{{filename}}
+内容如下：
 ```swift:{{filename}}
 {{filecontent}}
 ```
 
-The user has selected the following code from that file:
+用户已从该文件中选择以下代码：
 ```swift
 {{selected}}
 ```
 
-The user has asked:
+用户已提问：
 {{message}}

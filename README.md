@@ -1,113 +1,113 @@
-# **FULL v0, Cursor, Manus, Same.dev, Lovable, Devin, Replit Agent, Windsurf Agent, VSCode Agent, Dia Browser, Trae AI, Cluely, Perplexity, Xcode, Spawn & Orchids.app (And other Open Sourced) System Prompts, Tools & AI Models**  
+# **v0、Cursor、Manus、Same.dev、Lovable、Devin、Replit Agent、Windsurf Agent、VSCode Agent、Dia Browser、Trae AI、Cluely、Perplexity、Xcode、Spawn 和 Orchids.app（以及其他开源）的完整系统提示、工具和 AI 模型**
 
 ---
 
-# Tired of buiding trash games with generic AI tools?
+# 厌倦了用通用的 AI 工具构建垃圾游戏？
 <a href="https://spawn.co" target="_blank" rel="noopener noreferrer">
   <img width="200" height="200" alt="Spawn.co Logo" src="https://github.com/user-attachments/assets/669cef9b-eec1-4add-9a02-fb7e12602126" align="right" />
 </a>
 
-Stop **prototyping**. Start **shipping**.
+停止**原型设计**。开始**发布**。
 
-While other tools get stuck on prompts, [spawn.co](https://www.spawn.co/) uses cutting-edge AI to build and deploy complete games. I've spawned 4 complete game variants in under 20 minutes. Not prototypes - actual playable games with save systems, multiplayer, monetization ready to ship.
+当其他工具还在为提示而苦恼时，[spawn.co](https://www.spawn.co/) 使用尖端的 AI 来构建和部署完整的游戏。我在 20 分钟内生成了 4 个完整的游戏变体。不是原型——是带有存档系统、多人游戏、可直接上线的变现功能的真正可玩的游戏。
 
-It’s not marketing fluff, it’s just a better way to build.
+这不是营销噱头，这只是一种更好的构建方式。
 
-**Build. Ship. Done.**
+**构建。发布。完成。**
 
 ---
 
 <a href="https://trendshift.io/repositories/14084" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14084" alt="x1xhlol%2Fsystem-prompts-and-models-of-ai-tools | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 
-📜 Over **8500+ lines** of insights into their structure and functionality.  
+📜 超过 **8500+ 行** 的关于其结构和功能的见解。
 
-[![Build Status](https://app.cloudback.it/badge/x1xhlol/system-prompts-and-models-of-ai-tools)](https://cloudback.it)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/x1xhlol/system-prompts-and-models-of-ai-tools)
+[![构建状态](https://app.cloudback.it/badge/x1xhlol/system-prompts-and-models-of-ai-tools)](https://cloudback.it)
+[![询问 DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/x1xhlol/system-prompts-and-models-of-ai-tools)
 
 ---
 
-## ❤️ Support the Project
+## ❤️ 支持项目
 
-If you find this collection valuable and appreciate the effort involved in obtaining and sharing these insights, please consider supporting the project. Your contribution helps keep this resource updated and allows for further exploration.
+如果你觉得这个合集很有价值，并欣赏获取和分享这些见解所付出的努力，请考虑支持该项目。你的贡献有助于保持此资源的更新，并允许进一步的探索。
 
-You can show your support via:
+你可以通过以下方式表示支持：
 
 - **PayPal:** `lucknitelol@proton.me`
-- **Cryptocurrency:**  
-  - **BTC:** `bc1q7zldmzjwspnaa48udvelwe6k3fef7xrrhg5625`  
-  - **LTC:** `LRWgqwEYDwqau1WeiTs6Mjg85NJ7m3fsdQ`  
+- **加密货币:**
+  - **BTC:** `bc1q7zldmzjwspnaa48udvelwe6k3fef7xrrhg5625`
+  - **LTC:** `LRWgqwEYDwqau1WeiTs6Mjg85NJ7m3fsdQ`
   - **ETH:** `0x3f844B2cc3c4b7242964373fB0A41C4fdffB192A`
 - **Patreon:** https://patreon.com/lucknite
 
-🙏 Thank you for your support!
+🙏 感谢你的支持！
 
 
 ---
 
-## 📑 Table of Contents
+## 📑 目录
 
-1. [Available Files](#-available-files)  
-2. [Roadmap & Feedback](#-roadmap--feedback)  
-3. [Connect With Me](#-connect-with-me)  
-4. [Security Notice for AI Startups](#%EF%B8%8F-security-notice-for-ai-startups)  
-5. [Star History](#-star-history) 
+1. [可用文件](#-可用文件)
+2. [路线图和反馈](#-路线图和反馈)
+3. [与我联系](#-与我联系)
+4. [给 AI 初创公司的安全提示](#%EF%B8%8F-给-AI-初创公司的安全提示)
+5. [Star 历史](#-star-历史)
 
 ---
 
-## 📂 Available Files
+## 📂 可用文件
 
-- **v0 Folder**
-- **Spawn Folder**  
-- **Manus Folder**  
-- **Lovable Folder**  
-- **Devin Folder**  
-- **Same.dev Folder**  
-- **Replit Folder**  
-- **Windsurf Agent Folder**  
-- **VSCode (Copilot) Agent Folder**  
-- **Cursor Folder**  
-- **Dia Folder**  
-- **Trae AI Folder**
-- **Perplexity Folder**  
-- **Cluely Folder**
-- **Xcode Folder**
-- **Orchids.app Folder**
-- **Open Source prompts Folder**  
-  - Codex CLI  
-  - Cline  
-  - Bolt  
+- **v0 文件夹**
+- **Spawn 文件夹**
+- **Manus 文件夹**
+- **Lovable 文件夹**
+- **Devin 文件夹**
+- **Same.dev 文件夹**
+- **Replit 文件夹**
+- **Windsurf Agent 文件夹**
+- **VSCode (Copilot) Agent 文件夹**
+- **Cursor 文件夹**
+- **Dia 文件夹**
+- **Trae AI 文件夹**
+- **Perplexity 文件夹**
+- **Cluely 文件夹**
+- **Xcode 文件夹**
+- **Orchids.app 文件夹**
+- **开源提示文件夹**
+  - Codex CLI
+  - Cline
+  - Bolt
   - RooCode
   - Lumo
 
 ---
 
-## 🛠 Roadmap & Feedback
+## 🛠 路线图和反馈
 
-> Open an issue.
+> 提出一个问题。
 
-> **Latest Update:** 27/07/2025
+> **最新更新：** 2025 年 7 月 27 日
 
 ---
 
-## 🔗 Connect With Me
+## 🔗 与我联系
 
 - **X:** [NotLucknite](https://x.com/NotLucknite)
 - **Discord**: `x1xh`
 
 ---
 
-## 🛡️ Security Notice for AI Startups
+## 🛡️ 给 AI 初创公司的安全提示
 
-> ⚠️ **Warning:** If you're an AI startup, make sure your data is secure. Exposed prompts or AI models can easily become a target for hackers.
+> ⚠️ **警告：** 如果你是一家 AI 初创公司，请确保你的数据安全。暴露的提示或 AI 模型很容易成为黑客的目标。
 
-> 🔐 **Important:** Interested in securing your AI systems?  
-> Check out **[ZeroLeaks](https://zeroleaks.io/)**, a service designed to help startups **identify and secure** leaks in system instructions, internal tools, and model configurations. **Get a free AI security audit** to ensure your AI is protected from vulnerabilities.
+> 🔐 **重要提示：** 有兴趣保护你的 AI 系统吗？
+> 查看 **[ZeroLeaks](https://zeroleaks.io/)**，这是一项旨在帮助初创公司**识别和保护**系统指令、内部工具和模型配置中的泄漏的服务。**获取免费的 AI 安全审计**，以确保你的 AI 免受漏洞的侵害。
 
-*The company is mine, this is NOT a 3rd party AD.*
+*该公司是我的，这不是第三方广告。*
 
 ---
 
-## 📊 Star History
+## 📊 Star 历史
 
 <a href="https://www.star-history.com/#x1xhlol/system-prompts-and-models-of-ai-tools&Date">
   <picture>
@@ -117,4 +117,4 @@ You can show your support via:
   </picture>
 </a>
 
-⭐ **Drop a star if you find this useful!**
+⭐ **如果觉得有用，请点个 star！**

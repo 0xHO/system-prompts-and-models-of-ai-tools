@@ -1,20 +1,19 @@
-The user is curently inside this file: {{filename}}
-The contents are below:
+用户当前在此文件中：{{filename}}
+内容如下：
 ```swift:{{filename}}
 {{filecontent}}
 ```
 
-The user has selected the following code from that file:
+用户已从该文件中选中以下代码：
 ```swift
 {{selected}}
 ```
 
-The user has asked:
+用户已提问：
 
-Provide a brief example on how to use `{{selected}}`.
+提供一个关于如何使用 `{{selected}}` 的简短示例。
 
-- Respond only with a single code block.
-- Don't use comments. 
-- Don't use print statements. 
-- Don't import any additional modules.
-
+- 仅用一个代码块回复。
+- 不要使用注释。
+- 不要使用打印语句。
+- 不要导入任何额外的模块。

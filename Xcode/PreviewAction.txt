@@ -1,39 +1,39 @@
-The user is curently inside this file: {{filename}}
-The contents are below:
+用户当前在此文件中：{{filename}}
+内容如下：
 ```swift:{{filename}}
 {{filecontent}}
 ```
 
-The user has selected the following code from that file:
+用户已从该文件中选择以下代码：
 ```swift
 {{selected}}
 ```
 
-The user has asked:
+用户已询问：
 
-Your task is to create a Preview for a SwiftUI View and only return the code for the #Preview macro with no additional explanation.
+您的任务是为 SwiftUI View 创建一个 Preview，并且只返回 #Preview 宏的代码，不包含任何额外解释。
 
-The initializer for a #Preview is the following:
+#Preview 的初始化器如下：
 
 ```
 init(_ name: String? = nil, body: @escaping @MainActor () -> any View)
 ```
 
-An example of one is:
+一个示例如下：
 ```swift
 #Preview {
-      Text(\"Hello World!\")
+      Text("Hello World!")
 }
 ```
 
-Take the following into account when creating the #Preview:
-- If the view's code has any modifiers or types that look like the following, embed the View within a NavigationStack else do not add it:
+创建 #Preview 时请考虑以下事项：
+- 如果视图的代码有任何类似以下的修饰符或类型，则将 View 嵌入到 NavigationStack 中，否则不要添加：
     a) .navigation.*
     b) NavigationLink
     c) .toolbar.*
     d) .customizationBehavior
     e) .defaultCustomization
-- If the view's code has any modifiers that look like the following, or has the suffix Row, embed the View within a `List` else do not add it:
+- 如果视图的代码有任何类似以下的修饰符，或者后缀为 Row，则将 View 嵌入到 `List` 中，否则不要添加：
     a) .listItemTint
     b) .listItemPlatterColor
     c) .listRowBackground
@@ -44,15 +44,14 @@ Take the following into account when creating the #Preview:
     h) .listSectionSeparatorTint
     i) .listSectionSpacing
     j) .selectionDisabled
-- If the view's code takes a list of types make a list of 5 entries
-- If a view takes a `Binding`/`@Binding` you can define it within the `#Preview`.
-- Do not add @availability unless required. Only add if using:
+- 如果视图的代码接受类型列表，则创建包含 5 个条目的列表
+- 如果视图接受 `Binding`/`@Binding`，您可以在 `#Preview` 中定义它。
+- 除非需要，否则不要添加 @availability。仅在使用以下情况时添加：
     a) `@Previewable`
-- If there are static variables of the type needed by the View, prefer that over instantiating your own for the type.
-- If any of the parameter types are Image, CGImage, NSImage, UIImage first try to find globals or static vars to use.
+- 如果存在视图所需类型的静态变量，则优先使用它们，而不是为该类型实例化您自己的变量。
+- 如果任何参数类型是 Image、CGImage、NSImage、UIImage，请首先尝试查找要使用的全局变量或静态变量。
 
-The View to create the #Preview for is:
+要为其创建 #Preview 的 View 是：
 `{{selected}}`
 
-Return the #Preview and no additional explanation. ALWAYS wrap the preview in triple-tick markdown code snippet marks.
-
+返回 #Preview，不包含任何额外解释。始终将预览包裹在三重反引号 markdown 代码片段标记中。

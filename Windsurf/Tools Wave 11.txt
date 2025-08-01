@@ -1,368 +1,368 @@
-// Spin up a browser preview for a web server. This allows the USER to interact with the web server normally as well as provide console logs and other information from the web server to Cascade. Note that this tool call will not automatically open the browser preview for the USER, they must click one of the provided buttons to open it in the browser.
+// 为 Web 服务器启动浏览器预览。这允许用户正常与 Web 服务器交互，并向 Cascade 提供控制台日志和其他信息。请注意，此工具调用不会自动为用户打开浏览器预览，他们必须单击提供的按钮之一才能在浏览器中打开它。
 type browser_preview = (_: {
-// A short name 3-5 word name for the target web server. Should be title-cased e.g. 'Personal Website'. Format as a simple string, not as markdown; and please output the title directly, do not prefix it with 'Title:' or anything similar.
+// 目标 Web 服务器的简短名称，3-5 个单词。应采用标题大小写，例如“Personal Website”。格式化为简单字符串，而不是 markdown；请直接输出标题，不要在其前面加上“Title:”或任何类似内容。
 Name: string,
-// The URL of the target web server to provide a browser preview for. This should contain the scheme (e.g. http:// or https://), domain (e.g. localhost or 127.0.0.1), and port (e.g. :8080) but no path.
+// 要为其提供浏览器预览的目标 Web 服务器的 URL。这应包含方案（例如 http:// 或 https://）、域（例如 localhost 或 127.0.0.1）和端口（例如 :8080），但不能包含路径。
 Url: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Retrieve the console logs of a browser page that is already open in Windsurf Browser.
+// 检索已在 Windsurf 浏览器中打开的浏览器页面的控制台日志。
 type capture_browser_console_logs = (_: {
-// page_id of the Browser page to capture console logs of.
+// 要捕获控制台日志的浏览器页面的 page_id。
 PageId: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Capture a screenshot of the current viewport of a browser page that is already open in Windsurf Browser.
+// 捕获已在 Windsurf 浏览器中打开的浏览器页面当前视口的屏幕截图。
 type capture_browser_screenshot = (_: {
-// page_id of the Browser page to capture a screenshot of.
+// 要捕获屏幕截图的浏览器页面的 page_id。
 PageId: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Check the status of the deployment using its windsurf_deployment_id for a web application and determine if the application build has succeeded and whether it has been claimed. Do not run this unless asked by the user. It must only be run after a deploy_web_app tool call.
+// 使用其 windsurf_deployment_id 检查 Web 应用程序的部署状态，并确定应用程序构建是否成功以及是否已被声明。除非用户要求，否则不要运行此命令。它只能在 deploy_web_app 工具调用之后运行。
 type check_deploy_status = (_: {
-// The Windsurf deployment ID for the deploy we want to check status for. This is NOT a project_id.
+// 我们要检查状态的部署的 Windsurf 部署 ID。这不是 project_id。
 WindsurfDeploymentId: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Find snippets of code from the codebase most relevant to the search query. This performs best when the search query is more precise and relating to the function or purpose of code. Results will be poor if asking a very broad question, such as asking about the general 'framework' or 'implementation' of a large component or system. Will only show the full code contents of the top items, and they may also be truncated. For other items it will only show the docstring and signature. Use view_code_item with the same path and node name to view the full code contents for any item. Note that if you try to search over more than 500 files, the quality of the search results will be substantially worse. Try to only search over a large number of files if it is really necessary.
+// 从代码库中查找与搜索查询最相关的代码片段。当搜索查询更精确并与代码的功能或目的相关时，此功能表现最佳。如果提出非常宽泛的问题，例如询问大型组件或系统的通用“框架”或“实现”，则结果会很差。只会显示顶部项目的完整代码内容，并且它们也可能被截断。对于其他项目，它只会显示文档字符串和签名。使用具有相同路径和节点名称的 view_code_item 来查看任何项目的完整代码内容。请注意，如果你尝试搜索超过 500 个文件，搜索结果的质量将大大降低。仅在确实必要时才尝试搜索大量文件。
 type codebase_search = (_: {
-// Search query
+// 搜索查询
 Query: string,
-// List of absolute paths to directories to search over
+// 要搜索的目录的绝对路径列表
 TargetDirectories: string[],
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Get the status of a previously executed terminal command by its ID. Returns the current status (running, done), output lines as specified by output priority, and any error if present. Do not try to check the status of any IDs other than Background command IDs.
+// 按其 ID 获取先前执行的终端命令的状态。返回当前状态（正在运行、已完成）、按输出优先级指定的输出行以及任何存在的错误。不要尝试检查除后台命令 ID 之外的任何 ID 的状态。
 type command_status = (_: {
-// ID of the command to get status for
+// 要获取状态的命令的 ID
 CommandId: string,
-// Number of characters to view. Make this as small as possible to avoid excessive memory usage.
+// 要查看的字符数。使其尽可能小以避免过多的内存使用。
 OutputCharacterCount: integer,
-// Number of seconds to wait for command completion before getting the status. If the command completes before this duration, this tool call will return early. Set to 0 to get the status of the command immediately. If you are only interested in waiting for command completion, set to 60.
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 在获取状态之前等待命令完成的秒数。如果命令在此持续时间之前完成，则此工具调用将提前返回。设置为 0 可立即获取命令的状态。如果你只对等待命令完成感兴趣，请设置为 60。
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 WaitDurationSeconds: integer,
 toolSummary?: string,
 }) => any;
 
-// Save important context relevant to the USER and their task to a memory database.
-// Examples of context to save:
-// - USER preferences
-// - Explicit USER requests to remember something or otherwise alter your behavior
-// - Important code snippets
-// - Technical stacks
-// - Project structure
-// - Major milestones or features
-// - New design patterns and architectural decisions
-// - Any other information that you think is important to remember.
-// Before creating a new memory, first check to see if a semantically related memory already exists in the database. If found, update it instead of creating a duplicate.
-// Use this tool to delete incorrect memories when necessary.
+// 将与用户及其任务相关的重要上下文保存到内存数据库中。
+// 要保存的上下文示例：
+// - 用户偏好
+// - 用户明确要求记住某些内容或以其他方式改变你的行为
+// - 重要的代码片段
+// - 技术栈
+// - 项目结构
+// - 主要里程碑或功能
+// - 新的设计模式和架构决策
+// - 你认为重要的任何其他信息。
+// 在创建新内存之前，首先检查数据库中是否已存在语义相关的内存。如果找到，请更新它而不是创建重复的内存。
+// 必要时使用此工具删除不正确的内存。
 type create_memory = (_: {
-// The type of action to take on the MEMORY. Must be one of 'create', 'update', or 'delete'
+// 对内存执行的操作类型。必须是“create”、“update”或“delete”之一
 Action: "create" | "update" | "delete",
-// Content of a new or updated MEMORY. When deleting an existing MEMORY, leave this blank.
+// 新内存或更新后内存的内容。删除现有内存时，请将此项留空。
 Content: string,
-// CorpusNames of the workspaces associated with the MEMORY. Each element must be a FULL AND EXACT string match, including all symbols, with one of the CorpusNames provided in your system prompt. Only used when creating a new MEMORY.
+// 与内存关联的工作区的 CorpusNames。每个元素必须是完整且精确的字符串匹配，包括所有符号，与你的系统提示中提供的 CorpusNames 之一匹配。仅在创建新内存时使用。
 CorpusNames: string[],
-// Id of an existing MEMORY to update or delete. When creating a new MEMORY, leave this blank.
+// 要更新或删除的现有内存的 ID。创建新内存时，请将此项留空。
 Id: string,
-// Tags to associate with the MEMORY. These will be used to filter or retrieve the MEMORY. Only used when creating a new MEMORY. Use snake_case.
+// 与内存关联的标签。这些将用于筛选或检索内存。仅在创建新内存时使用。使用 snake_case。
 Tags: string[],
-// Descriptive title for a new or updated MEMORY. This is required when creating or updating a memory. When deleting an existing MEMORY, leave this blank.
+// 新内存或更新后内存的描述性标题。在创建或更新内存时，此项是必需的。删除现有内存时，请将此项留空。
 Title: string,
-// Set to true if the user explicitly asked you to create/modify this memory.
+// 如果用户明确要求你创建/修改此内存，则设置为 true。
 UserTriggered: boolean,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Deploy a JavaScript web application to a deployment provider like Netlify. Site does not need to be built. Only the source files are required. Make sure to run the read_deployment_config tool first and that all missing files are created before attempting to deploy. If you are deploying to an existing site, use the project_id to identify the site. If you are deploying a new site, leave the project_id empty.
+// 将 JavaScript Web 应用程序部署到 Netlify 等部署提供商。站点无需构建。只需要源文件。在尝试部署之前，请确保先运行 read_deployment_config 工具并创建所有缺失的文件。如果要部署到现有站点，请使用 project_id 来标识该站点。如果要部署新站点，请将 project_id 留空。
 type deploy_web_app = (_: {
-// The framework of the web application.
+// Web 应用程序的框架。
 Framework: "eleventy" | "angular" | "astro" | "create-react-app" | "gatsby" | "gridsome" | "grunt" | "hexo" | "hugo" | "hydrogen" | "jekyll" | "middleman" | "mkdocs" | "nextjs" | "nuxtjs" | "remix" | "sveltekit" | "svelte",
-// The project ID of the web application if it exists in the deployment configuration file. Leave this EMPTY for new sites or if the user would like to rename a site. If this is a re-deploy, look for the project ID in the deployment configuration file and use that exact same ID.
+// 如果 Web 应用程序存在于部署配置文件中，则为其项目 ID。对于新站点或用户希望重命名站点，请将此项留空。如果是重新部署，请在部署配置文件中查找项目 ID 并使用该确切的 ID。
 ProjectId: string,
-// The full absolute project path of the web application.
+// Web 应用程序的完整绝对项目路径。
 ProjectPath: string,
-// Subdomain or project name used in the URL. Leave this EMPTY if you are deploying to an existing site using the project_id. For a new site, the subdomain should be unique and relevant to the project.
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// URL 中使用的子域或项目名称。如果要使用 project_id 部署到现有站点，请将此项留空。对于新站点，子域应唯一且与项目相关。
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 Subdomain: string,
 toolSummary?: string,
 }) => any;
 
-// Search for files and subdirectories within a specified directory using fd.
-// Search uses smart case and will ignore gitignored files by default.
-// Pattern and Excludes both use the glob format. If you are searching for Extensions, there is no need to specify both Pattern AND Extensions.
-// To avoid overwhelming output, the results are capped at 50 matches. Use the various arguments to filter the search scope as needed.
-// Results will include the type, size, modification time, and relative path.
+// 使用 fd 在指定目录中搜索文件和子目录。
+// 搜索使用智能大小写，默认情况下会忽略 gitignored 文件。
+// Pattern 和 Excludes 都使用 glob 格式。如果要搜索扩展名，则无需同时指定 Pattern 和 Extensions。
+// 为避免输出过多，结果上限为 50 个匹配项。根据需要使用各种参数来筛选搜索范围。
+// 结果将包括类型、大小、修改时间和相对路径。
 type find_by_name = (_: {
-// Optional, exclude files/directories that match the given glob patterns
+// 可选，排除与给定 glob 模式匹配的文件/目录
 Excludes: string[],
-// Optional, file extensions to include (without leading .), matching paths must match at least one of the included extensions
+// 可选，要包含的文件扩展名（不带前导 .），匹配的路径必须至少匹配一个包含的扩展名
 Extensions: string[],
-// Optional, whether the full absolute path must match the glob pattern, default: only filename needs to match. Take care when specifying glob patterns with this flag on, e.g when FullPath is on, pattern '*.py' will not match to the file '/foo/bar.py', but pattern '**/*.py' will match.
+// 可选，完整绝对路径是否必须匹配 glob 模式，默认：只需要文件名匹配。在此标志打开时指定 glob 模式时要小心，例如，当 FullPath 打开时，模式“*.py”将不匹配文件“/foo/bar.py”，但模式“**/*.py”将匹配。
 FullPath: boolean,
-// Optional, maximum depth to search
+// 可选，最大搜索深度
 MaxDepth: integer,
-// Optional, Pattern to search for, supports glob format
+// 可选，要搜索的模式，支持 glob 格式
 Pattern: string,
-// The directory to search within
+// 要在其中搜索的目录
 SearchDirectory: string,
-// Optional, type filter, enum=file,directory,any
+// 可选，类型筛选器，枚举=file,directory,any
 Type: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Get the DOM tree of an open page in the Windsurf Browser.
+// 获取 Windsurf 浏览器中打开页面的 DOM 树。
 type get_dom_tree = (_: {
-// page_id of the Browser page to get the DOM tree of
+// 要获取 DOM 树的浏览器页面的 page_id
 PageId: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Use ripgrep to find exact pattern matches within files or directories.
-// Results are returned in JSON format and for each match you will receive the:
-// - Filename
-// - LineNumber
-// - LineContent: the content of the matching line
-// Total results are capped at 50 matches. Use the Includes option to filter by file type or specific paths to refine your search.
+// 使用 ripgrep 在文件或目录中查找精确的模式匹配。
+// 结果以 JSON 格式返回，对于每个匹配项，你将收到：
+// - 文件名
+// - 行号
+// - 行内容：匹配行的内容
+// 总结果上限为 50 个匹配项。使用 Includes 选项按文件类型或特定路径进行筛选以优化搜索。
 type grep_search = (_: {
-// If true, performs a case-insensitive search.
+// 如果为 true，则执行不区分大小写的搜索。
 CaseInsensitive: boolean,
-// Glob patterns to filter files found within the 'SearchPath', if 'SearchPath' is a directory. For example, '*.go' to only include Go files, or '!**/vendor/*' to exclude vendor directories. This is NOT for specifying the primary search directory; use 'SearchPath' for that. Leave empty if no glob filtering is needed or if 'SearchPath' is a single file.
+// 用于筛选在“SearchPath”中找到的文件的 Glob 模式，如果“SearchPath”是目录。例如，“*.go”仅包含 Go 文件，或“!**/vendor/*”排除 vendor 目录。这不用于指定主搜索目录；请为此使用“SearchPath”。如果不需要 glob 筛选或“SearchPath”是单个文件，则留空。
 Includes: string[],
-// If true, treats Query as a regular expression pattern with special characters like *, +, (, etc. having regex meaning. If false, treats Query as a literal string where all characters are matched exactly. Use false for normal text searches and true only when you specifically need regex functionality.
+// 如果为 true，则将 Query 视为具有特殊字符（如 *、+、（ 等）具有正则表达式含义的正则表达式模式。如果为 false，则将 Query 视为文字字符串，其中所有字符都完全匹配。对普通文本搜索使用 false，仅在特别需要正则表达式功能时才使用 true。
 IsRegex: boolean,
-// If true, returns each line that matches the query, including line numbers and snippets of matching lines (equivalent to 'git grep -nI'). If false, only returns the names of files containing the query (equivalent to 'git grep -l').
+// 如果为 true，则返回与查询匹配的每一行，包括行号和匹配行的片段（等效于“git grep -nI”）。如果为 false，则仅返回包含查询的文件的名称（等效于“git grep -l”）。
 MatchPerLine: boolean,
-// The search term or pattern to look for within files.
+// 要在文件中查找的搜索词或模式。
 Query: string,
-// The path to search. This can be a directory or a file. This is a required parameter.
+// 要搜索的路径。可以是目录或文件。这是一个必需的参数。
 SearchPath: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// List all open pages in Windsurf Browser and their metadata (page_id, url, title, viewport size, etc.).
+// 列出 Windsurf 浏览器中所有打开的页面及其元数据（page_id、url、标题、视口大小等）。
 type list_browser_pages = (_: {
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// List the contents of a directory. Directory path must be an absolute path to a directory that exists. For each child in the directory, output will have: relative path to the directory, whether it is a directory or file, size in bytes if file, and number of children (recursive) if directory.
+// 列出目录的内容。目录路径必须是存在的目录的绝对路径。对于目录中的每个子项，输出将包含：到目录的相对路径、是目录还是文件、文件大小（以字节为单位，如果是文件）、子项数量（递归，如果是目录）。
 type list_dir = (_: {
-// Path to list contents of, should be absolute path to a directory that exists.
+// 要列出其内容的路径，应为存在的目录的绝对路径。
 DirectoryPath: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Lists the available resources from an MCP server.
+// 列出 MCP 服务器的可用资源。
 type list_resources = (_: {
-// Name of the server to list available resources from.
+// 要从中列出可用资源的服务器的名称。
 ServerName: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Open a URL in Windsurf Browser to view the page contents of a URL in a rendered format.
+// 在 Windsurf 浏览器中打开一个 URL，以渲染格式查看该 URL 的页面内容。
 type open_browser_url = (_: {
-// The URL to open in the user's browser.
+// 要在用户浏览器中打开的 URL。
 Url: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Read an open page in the Windsurf Browser.
+// 读取 Windsurf 浏览器中打开的页面。
 type read_browser_page = (_: {
-// page_id of the Browser page to read
+// 要读取的浏览器页面的 page_id
 PageId: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Read the deployment configuration for a web application and determine if the application is ready to be deployed. Should only be used in preparation for the deploy_web_app tool.
+// 读取 Web 应用程序的部署配置，并确定该应用程序是否已准备好部署。仅应在准备 deploy_web_app 工具时使用。
 type read_deployment_config = (_: {
-// The full absolute project path of the web application.
+// Web 应用程序的完整绝对项目路径。
 ProjectPath: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Retrieves a specified resource's contents.
+// 检索指定资源的内容。
 type read_resource = (_: {
-// Name of the server to read the resource from.
+// 要从中读取资源的服务器的名称。
 ServerName: string,
-// Unique identifier for the resource.
+// 资源的唯一标识符。
 Uri: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Reads the contents of a terminal given its process ID.
+// 读取给定其进程 ID 的终端的内容。
 type read_terminal = (_: {
-// Name of the terminal to read.
+// 要读取的终端的名称。
 Name: string,
-// Process ID of the terminal to read.
+// 要读取的终端的进程 ID。
 ProcessID: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Read content from a URL. URL must be an HTTP or HTTPS URL that points to a valid internet resource accessible via web browser.
+// 从 URL 读取内容。URL 必须是 HTTP 或 HTTPS URL，指向可通过 Web 浏览器访问的有效互联网资源。
 type read_url_content = (_: {
-// URL to read content from
+// 要从中读取内容的 URL
 Url: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Use this tool to edit an existing file.. Follow these rules:
-// 1. Do NOT make multiple parallel calls to this tool for the same file.
-// 2. To edit multiple, non-adjacent lines of code in the same file, make a single call to this tool. Specify each edit as a separate ReplacementChunk.
-// 3. For each ReplacementChunk, specify TargetContent and ReplacementContent. In TargetContent, specify the precise lines of code to edit. These lines MUST EXACTLY MATCH text in the existing file content. In ReplacementContent, specify the replacement content for the specified target content. This must be a complete drop-in replacement of the TargetContent, with necessary modifications made.
-// 4. If you are making multiple edits across a single file, specify multiple separate ReplacementChunks. DO NOT try to replace the entire existing content with the new content, this is very expensive.
-// 5. You may not edit file extensions: [.ipynb]
-// IMPORTANT: You must generate the following arguments first, before any others: [TargetFile]
+// 使用此工具编辑现有文件。请遵循以下规则：
+// 1. 不要对同一个文件进行多个并行的此工具调用。
+// 2. 要在同一个文件中编辑多个不相邻的代码行，请对此工具进行一次调用。将每个编辑指定为单独的 ReplacementChunk。
+// 3. 对于每个 ReplacementChunk，指定 TargetContent 和 ReplacementContent。在 TargetContent 中，指定要编辑的精确代码行。这些行必须与现有文件内容中的文本完全匹配。在 ReplacementContent 中，指定指定目标内容的替换内容。这必须是 TargetContent 的完整直接替换，并进行了必要的修改。
+// 4. 如果要在一个文件中进行多次编辑，请指定多个单独的 ReplacementChunk。不要尝试用新内容替换整个现有内容，这非常昂贵。
+// 5. 你不能编辑文件扩展名：[.ipynb]
+// 重要提示：你必须在任何其他参数之前首先生成以下参数：[TargetFile]
 type replace_file_content = (_: {
-// Markdown language for the code block, e.g 'python' or 'javascript'
+// 代码块的 Markdown 语言，例如“python”或“javascript”
 CodeMarkdownLanguage: string,
-// A description of the changes that you are making to the file.
+// 对你正在对文件进行的更改的描述。
 Instruction: string,
-// A list of chunks to replace. It is best to provide multiple chunks for non-contiguous edits if possible. This must be a JSON array, not a string.
+// 要替换的块列表。如果可能，最好为不连续的编辑提供多个块。这必须是 JSON 数组，而不是字符串。
 ReplacementChunks: Array<
 {
-// If true, multiple occurrences of 'targetContent' will be replaced by 'replacementContent' if they are found. Otherwise if multiple occurences are found, an error will be returned.
+// 如果为 true，则如果找到多个“targetContent”的出现，它们将被“replacementContent”替换。否则，如果找到多个出现，将返回错误。
 AllowMultiple: boolean,
-// The content to replace the target content with.
+// 用于替换目标内容的内容。
 ReplacementContent: string,
-// The exact string to be replaced. This must be the exact character-sequence to be replaced, including whitespace. Be very careful to include any leading whitespace otherwise this will not work at all. If AllowMultiple is not true, then this must be a unique substring within the file, or else it will error.
+// 要替换的确切字符串。这必须是要替换的确切字符序列，包括空格。请非常小心地包含任何前导空格，否则这将根本不起作用。如果 AllowMultiple 不为 true，则这必须是文件中的唯一子字符串，否则将出错。
 TargetContent: string,
 }
 >,
-// The target file to modify. Always specify the target file as the very first argument.
+// 要修改的目标文件。始终将目标文件指定为第一个参数。
 TargetFile: string,
-// If applicable, IDs of lint errors this edit aims to fix (they'll have been given in recent IDE feedback). If you believe the edit could fix lints, do specify lint IDs; if the edit is wholly unrelated, do not. A rule of thumb is, if your edit was influenced by lint feedback, include lint IDs. Exercise honest judgement here.
+// 如果适用，此编辑旨在修复的 lint 错误的 ID（它们将在最近的 IDE 反馈中给出）。如果你认为编辑可以修复 lint，请指定 lint ID；如果编辑完全不相关，则不要指定。经验法则是，如果你的编辑受到 lint 反馈的影响，请包含 lint ID。在此处进行诚实的判断。
 TargetLintErrorIds?: string[],
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// PROPOSE a command to run on behalf of the user. Operating System: windows. Shell: powershell.
-// **NEVER PROPOSE A cd COMMAND**.
-// If you have this tool, note that you DO have the ability to run commands directly on the USER's system.
-// Make sure to specify CommandLine exactly as it should be run in the shell.
-// Note that the user will have to approve the command before it is executed. The user may reject it if it is not to their liking.
-// The actual command will NOT execute until the user approves it. The user may not approve it immediately.
-// If the step is WAITING for user approval, it has NOT started running.
-// Commands will be run with PAGER=cat. You may want to limit the length of output for commands that usually rely on paging and may contain very long output (e.g. git log, use git log -n <N>).
+// 代表用户提议运行命令。操作系统：windows。Shell：powershell。
+// **绝不提议 cd 命令**。
+// 如果你有此工具，请注意你确实有能力直接在用户的系统上运行命令。
+// 确保完全按照应在 shell 中运行的方式指定 CommandLine。
+// 请注意，用户必须在命令执行之前批准该命令。如果用户不喜欢，他们可能会拒绝它。
+// 实际命令在用户批准之前不会执行。用户可能不会立即批准它。
+// 如果步骤正在等待用户批准，则它尚未开始运行。
+// 命令将使用 PAGER=cat 运行。你可能希望限制通常依赖于分页并且可能包含非常长输出的命令的输出长度（例如 git log，使用 git log -n <N>）。
 type run_command = (_: {
-// If true, the command will block until it is entirely finished. During this time, the user will not be able to interact with Cascade. Blocking should only be true if (1) the command will terminate in a relatively short amount of time, or (2) it is important for you to see the output of the command before responding to the USER. Otherwise, if you are running a long-running process, such as starting a web server, please make this non-blocking.
+// 如果为 true，则命令将阻塞直到完全完成。在此期间，用户将无法与 Cascade 交互。仅当 (1) 命令将在相对较短的时间内终止，或 (2) 在响应用户之前查看命令的输出对你很重要时，才应将阻塞设置为 true。否则，如果要运行长时间运行的进程（例如启动 Web 服务器），请将其设置为非阻塞。
 Blocking?: boolean,
-// The exact command line string to execute.
+// 要执行的确切命令行字符串。
 CommandLine: string,
-// The current working directory for the command
+// 命令的当前工作目录
 Cwd?: string,
-// Set to true if you believe that this command is safe to run WITHOUT user approval. A command is unsafe if it may have some destructive side-effects. Example unsafe side-effects include: deleting files, mutating state, installing system dependencies, making external requests, etc. Set to true only if you are extremely confident it is safe. If you feel the command could be unsafe, never set this to true, EVEN if the USER asks you to. It is imperative that you never auto-run a potentially unsafe command.
+// 如果你认为此命令可以安全地在未经用户批准的情况下运行，则设置为 true。如果命令可能具有某些破坏性副作用，则该命令是不安全的。不安全的副作用示例包括：删除文件、改变状态、安装系统依赖项、发出外部请求等。仅在你非常有信心它是安全的情况下才设置为 true。如果你觉得该命令可能不安全，则绝不将其设置为 true，即使是用户要求你这样做。你绝不能自动运行可能不安全的命令，这一点至关重要。
 SafeToAutoRun?: boolean,
-// Only applicable if Blocking is false. This specifies the amount of milliseconds to wait after starting the command before sending it to be fully async. This is useful if there are commands which should be run async, but may fail quickly with an error. This allows you to see the error if it happens in this duration. Don't set it too long or you may keep everyone waiting.
+// 仅在 Blocking 为 false 时适用。这指定了在启动命令后将其完全异步发送之前等待的毫秒数。这对于应异步运行但可能会快速失败并出现错误的命令很有用。这使你可以在此持续时间内看到错误（如果发生）。不要设置得太长，否则可能会让每个人都等着。
 WaitMsBeforeAsync?: integer,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Performs a web search to get a list of relevant web documents for the given query and optional domain filter.
+// 执行 Web 搜索以获取与给定查询和可选域筛选器相关的 Web 文档列表。
 type search_web = (_: {
-// Optional domain to recommend the search prioritize
+// 建议搜索优先考虑的可选域
 domain: string,
 query: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// If you are calling no other tools and are asking a question to the user, use this tool to supply a small number of possible suggested answers to your question. Examples can be Yes/No, or other simple multiple choice options. Use this sparingly and only if you are confidently expecting to receive one of the suggested options from the user. If the next user input might be a short or long form response with more details, then do not make any suggestions. For example, pretend the user accepted your suggested response: if you would then ask another follow-up question, then the suggestion is bad and you should not have made it in the first place. Try not to use this many times in a row.
+// 如果你不调用其他工具并且正在向用户提问，请使用此工具为你的问题提供少量可能的建议答案。示例可以是“是/否”或其他简单的多项选择选项。仅在你确信会从用户那里收到建议的选项之一时才谨慎使用此工具。如果下一个用户输入可能是带有更多详细信息的简短或长格式响应，则不要提出任何建议。例如，假设用户接受了你建议的响应：如果你随后会问另一个后续问题，那么该建议是不好的，你一开始就不应该提出它。尽量不要连续多次使用此工具。
 type suggested_responses = (_: {
-// List of suggestions. Each should be at most a couple words, do not return more than 3 options.
+// 建议列表。每个建议最多应为几个单词，不要返回超过 3 个选项。
 Suggestions: string[],
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Semantic search or retrieve trajectory. Trajectories are one of conversations. Returns chunks from the trajectory, scored, sorted, and filtered by relevance. Maximum number of chunks returned is 50. Call this tool when the user @mentions a @conversation. Do NOT call this tool with SearchType: 'user'. IGNORE @activity mentions.
+// 语义搜索或检索轨迹。轨迹是对话之一。返回轨迹中的块，按相关性评分、排序和筛选。返回的最大块数为 50。当用户@提及@对话时调用此工具。不要使用 SearchType: 'user' 调用此工具。忽略@活动提及。
 type trajectory_search = (_: {
-// The ID of the trajectory to search or retrieve: cascade ID for conversations, trajectory ID for user activities.
+// 要搜索或检索的轨迹的 ID：对话的级联 ID，用户活动的用户活动 ID。
 ID: string,
-// The query string to search for within the trajectory. An empty query will return all trajectory steps.
+// 要在轨迹中搜索的查询字符串。空查询将返回所有轨迹步骤。
 Query: string,
-// The type of item to search or retrieve: 'cascade' for conversations, or 'user' for user activities.
+// 要搜索或检索的项目类型：“cascade”表示对话，“user”表示用户活动。
 SearchType: "cascade" | "user",
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// View the content of up to 5 code item nodes in a file, each as a class or a function. You must use fully qualified code item names, such as those return by the grep_search or other tools. For example, if you have a class called `Foo` and you want to view the function definition `bar` in the `Foo` class, you would use `Foo.bar` as the NodeName. Do not request to view a symbol if the contents have been previously shown by the codebase_search tool. If the symbol is not found in a file, the tool will return an empty string instead.
+// 查看文件中最多 5 个代码项节点的内容，每个节点为一个类或一个函数。你必须使用完全限定的代码项名称，例如 grep_search 或其他工具返回的名称。例如，如果你有一个名为 `Foo` 的类，并且你想查看 `Foo` 类中的函数定义 `bar`，则应使用 `Foo.bar` 作为 NodeName。如果 codebase_search 工具先前已显示了符号的内容，则不要请求查看该符号。如果文件中未找到该符号，该工具将返回一个空字符串。
 type view_code_item = (_: {
-// Absolute path to the node to view, e.g /path/to/file
+// 要查看的节点的绝对路径，例如 /path/to/file
 File?: string,
-// Path of the nodes within the file, e.g package.class.FunctionName
+// 文件中节点的路径，例如 package.class.FunctionName
 NodePaths: string[],
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// View a specific chunk of document content using its DocumentId and chunk position. The DocumentId must have already been read by the read_url_content or read_knowledge_base_item tool before this can be used on that particular DocumentId.
+// 使用其 DocumentId 和块位置查看特定块的文档内容。在可以在该特定 DocumentId 上使用此工具之前，必须已通过 read_url_content 或 read_knowledge_base_item 工具读取 DocumentId。
 type view_content_chunk = (_: {
-// The ID of the document that the chunk belongs to
+// 块所属文档的 ID
 document_id: string,
-// The position of the chunk to view
+// 要查看的块的位置
 position: integer,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// View the contents of a file. The lines of the file are 1-indexed, and the output of this tool call will be the file contents from StartLine to EndLine (inclusive), together with a summary of the lines outside of StartLine and EndLine. Note that this call can view at most 400 lines at a time.
+// 查看文件的内容。文件的行是 1 索引的，此工具调用的输出将是文件的内容，从 StartLine 到 EndLine（含），以及 StartLine 和 EndLine 之外的行的摘要。请注意，此调用一次最多可以查看 400 行。
 //
-// When using this tool to gather information, it's your responsibility to ensure you have the COMPLETE context. Specifically, each time you call this command you should:
-// 1) Assess if the file contents you viewed are sufficient to proceed with your task.
-// 2) If the file contents you have viewed are insufficient, and you suspect they may be in lines not shown, proactively call the tool again to view those lines.
-// 3) When in doubt, call this tool again to gather more information. Remember that partial file views may miss critical dependencies, imports, or functionality.
+// 使用此工具收集信息时，你有责任确保你拥有完整的上下文。具体来说，每次调用此命令时，你都应该：
+// 1) 评估你查看的文件内容是否足以继续你的任务。
+// 2) 如果你查看的文件内容不足，并且你怀疑它们可能在未显示的行中，请主动再次调用该工具以查看这些行。
+// 3) 如有疑问，请再次调用此工具以收集更多信息。请记住，部分文件视图可能会遗漏关键的依赖项、导入或功能。
 type view_file = (_: {
-// Path to file to view. Must be an absolute path.
+// 要查看的文件的路径。必须是绝对路径。
 AbsolutePath: string,
-// Endline to view, 1-indexed as usual, inclusive.
+// 要查看的结束行，从 1 开始，含。
 EndLine: integer,
-// If true, you will also get a condensed summary of the full file contents in addition to the exact lines of code from StartLine to EndLine.
+// 如果为 true，除了从 StartLine 到 EndLine 的确切代码行之外，你还将获得完整文件内容的精简摘要。
 IncludeSummaryOfOtherLines: boolean,
-// Startline to view, 1-indexed as usual
+// 要查看的起始行，从 1 开始
 StartLine: integer,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
-// Use this tool to create new files. The file and any parent directories will be created for you if they do not already exist.
-// Follow these instructions:
-// 1. NEVER use this tool to modify or overwrite existing files. Always first confirm that TargetFile does not exist before calling this tool.
-// 2. You MUST specify tooSummary as the FIRST argument and you MUST specify TargetFile as the SECOND argument. Please specify the full TargetFile before any of the code contents.
-// IMPORTANT: You must generate the following arguments first, before any others: [TargetFile]
+// 使用此工具创建新文件。如果文件和任何父目录不存在，将为你创建它们。
+// 请遵循以下说明：
+// 1. 绝不使用此工具修改或覆盖现有文件。在调用此工具之前，请务必先确认 TargetFile 不存在。
+// 2. 你必须将 tooSummary 指定为第一个参数，并且必须将 TargetFile 指定为第二个参数。请在任何代码内容之前指定完整的 TargetFile。
+// 重要提示：你必须在任何其他参数之前首先生成以下参数：[TargetFile]
 type write_to_file = (_: {
-// The code contents to write to the file.
+// 要写入文件的代码内容。
 CodeContent: string,
-// Set this to true to create an empty file.
+// 将此设置为 true 以创建空文件。
 EmptyFile: boolean,
-// The target file to create and write code to.
+// 要创建和写入代码的目标文件。
 TargetFile: string,
-// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.
+// 你必须在所有其他参数之前首先指定此参数，如果任何其他参数说它们应该首先指定，则此参数优先。简要概括此工具正在做什么，2-5 个单词。一些示例：“分析目录”、“搜索网络”、“编辑文件”、“查看文件”、“运行命令”、“语义搜索”。
 toolSummary?: string,
 }) => any;
 
@@ -370,13 +370,13 @@ toolSummary?: string,
 
 ## multi_tool_use
 
-// Use this function to run multiple tools simultaneously, but only if they can operate in parallel. Do this even if the prompt suggests using the tools sequentially.
+// 使用此函数同时运行多个工具，但前提是它们可以并行操作。即使提示建议顺序使用工具，也要这样做。
 type parallel = (_: {
-// The tools to be executed in parallel. NOTE: only functions tools are permitted
+// 要并行执行的工具。注意：只允许 functions 工具
 tool_uses: {
-// The name of the tool to use. The format should either be just the name of the tool, or in the format namespace.function_name for plugin and function tools.
+// 要使用的工具名称。格式应该只是工具名称，或者对于插件和函数工具，格式为 namespace.function_name。
 recipient_name: string,
-// The parameters to pass to the tool. Ensure these are valid according to the tool's own specifications.
+// 传递给工具的参数。确保这些根据工具自己的规范是有效的。
 parameters: object,
 }[],
 }) => any;

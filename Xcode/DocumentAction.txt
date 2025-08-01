@@ -1,18 +1,17 @@
-The user is curently inside this file: {{filename}}
-The contents are below:
+用户当前在此文件中：{{filename}}
+内容如下：
 ```swift:{{filename}}
 {{filecontent}}
 ```
 
-The user has selected the following code from that file:
+用户已从该文件中选择以下代码：
 ```swift
 {{selected_code}}
 ```
 
-The user has asked:
+用户已询问：
 
-Provide documentation for `{{selected_code}}`.
+为 `{{selected_code}}` 提供文档。
 
-- Respond with a single code block.
-- Only include documentation comments. No other Swift code.
-
+- 仅用一个代码块回复。
+- 仅包含文档注释。不包含其他 Swift 代码。
